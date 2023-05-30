@@ -10,7 +10,7 @@ To retrieve vinyl record data, I used a python library that uses the Discogs API
 * [Discogs API](https://www.discogs.com/developers)
 
 ### User Group:
-The user group is towards older teenagers to adults of any age. This is mostly due to the fact that some records may not be suitable for children. 
+This website is target to a diverse group of users, primarily young adults and adults of any age. Caution: There may be records not suitable for children. 
 
 ### Tech Stack:
 * Python
