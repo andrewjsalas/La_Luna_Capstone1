@@ -1,4 +1,10 @@
 lock.py
+<<<<<<< HEAD
 venv
 _pycahce_
 migrations/
+=======
+migrations/
+_pycache_
+venv/
+>>>>>>> c957ebe4418c882c01e40015060fc16c8811e077
