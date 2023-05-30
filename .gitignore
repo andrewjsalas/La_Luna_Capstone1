@@ -1,4 +1,4 @@
 lock.py
-.venv/
+venv
 _pycahce_/
-migrations/
+migrations
