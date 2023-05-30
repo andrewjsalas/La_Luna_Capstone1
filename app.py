@@ -12,12 +12,14 @@ from lock import API_TOKEN
 from models import db, connect_db, User, Collection
 from forms import LoginForm, RegisterForm, UserEditForm
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 
 
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 migrate = Migrate(app, db)
+bcrypt = Bcrypt()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///recordshopdb"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -108,7 +110,7 @@ def login():
 
         user = User.query.filter_by(username=name).first()
 
-        if user and user.password == pwd:
+        if user and bcrypt.check_password_hash(user.password, pwd):
             do_login(user)
             return redirect("/")
 
