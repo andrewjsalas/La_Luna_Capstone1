@@ -1,0 +1,139 @@
+{% extends 'base.html' %}  
+
+{% block content %} 
+
+<div class="home-container text-light">
+    <div>
+        <img class="header-logo" src="/static/images/lalunaheaderlogo.png" alt="">
+    </div>
+    
+    <!-- Search Bar -->
+    <h3 class="m-3 mt-1 text-center">Search an Artist, Band, Song, etc.</h3>
+    <form class="form" action="/" method="POST"> 
+        <div class="search-bar input-group w-75 ml-auto mr-auto">
+            <input class="form-control form-control-lg" type="text" name="query" placeholder="Search for a release">
+            <span class="input-group-append">
+                <button class="btn btn-dark btn-lg" type="Submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+    
+    <!-- Display Search Results -->
+    <div class="releases-container">
+        {% if results %} 
+        <h2 class="m-3">Results: </h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 m-3">
+            {% for result in results %}
+            <div class="col mb-4 text-dark">
+                <div class="card bg-light">
+                    <img 
+                        class="card-image" 
+                        src="{{ result['thumbnail'] }}" 
+                        alt="{{ result['title'] }}"
+                    >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ result['title'] }}</h5>
+                        <p class="card-text">{{ result['year'] }}</p>
+
+                        <div class="add-btn position-absolute bottom-0 start-0 end-0 p-2">
+                            <form 
+                                class="add-to-collection"
+                                action="/"
+                                method="POST"
+                            >
+                                <input 
+                                    type="hidden" 
+                                    name="title" 
+                                    value="{{ release['title'] }}"
+                                >
+                                <input 
+                                    type="hidden" 
+                                    name="year" 
+                                    value="{{ release['year'] }}"
+                                >
+                                <input 
+                                    type="hidden" 
+                                    name="thumbnail" 
+                                    value="{{ release['thumbnail'] }}"
+                                >
+                                <button 
+                                    class="btn btn-dark add-btn-hidden" type="submit"
+                                >
+                                    Add to Collection
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Featured Releases -->
+    <div class="releases-container">
+        {% if featured %}
+        <h2 class="m-3 mt-4">Featured Releases: </h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 rows-cols-xl-5 m-3">
+            {% for release in featured %}
+            <div class="col mb-4 text-dark d-flex">
+                <div class="card bg-light flex-fill">
+                    <img 
+                        class="card-image-top" 
+                        src="{{  release['thumbnail']}}" 
+                        alt="{{ release['title'] }}"
+                    >
+                    <div class="card-body p-2">
+                        <h5 class="card-title">{{ release['title'] }}</h5>
+                        <p class="card-text mb-2">{{ release['year'] }}</p>
+
+                        <div class="add-btn position-absolute bottom-0 start-0 end-0 p-2">
+                            <form 
+                                class="add-to-collection"
+                                action="/"
+                                method="POST"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="release_id"
+                                    value="{{ release['id'] }}"
+                                >
+                                <input 
+                                    type="hidden" 
+                                    name="title" 
+                                    value="{{ release['title'] }}"
+                                >
+                                <input 
+                                    type="hidden" 
+                                    name="year" 
+                                    value="{{ release['year'] }}"
+                                >
+                                <input 
+                                    type="hidden" 
+                                    name="thumbnail" 
+                                    value="{{ release['thumbnail'] }}"
+                                >
+                                <button 
+                                    class="btn btn-dark add-btn-hidden" type="submit"
+                                >
+                                    Add to Collection
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+   
+</div>
+
+{% endblock %}

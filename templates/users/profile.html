@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+
+<div>
+    <h1 class="m-5 text-light">Hello, {{ g.user.username }}</h1>
+
+    <div>
+        <p class="m-5 text-light">
+            <a 
+                class="text-light"
+                id="active1"   
+                href="/logout">
+                Log Out
+            </a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

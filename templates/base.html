@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/bootstrap"></script>
+    <link 
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>{% block title %}{% endblock %}La Luna Record Shop</title>
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed" id="navbar1">
+        <div class="container">
+            
+            <!-- Nav Logo -->
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">
+                    <img 
+                    class="navLogo" 
+                    src="/static/images/La Luna Yellow.png" 
+                    alt="logo"
+                    >
+                    <span class="text-light">La Luna Record Shop</span>
+                </a>
+            </div>
+            
+            <!-- Hamburger button for small/mobile screens -->
+            <button 
+                class="navbar-toggler toggler-example" 
+                type="button" 
+                data-toggle="collapse" 
+                data-target="#navbarSupportedContent1"  aria-controls="navbarSupportedContent1" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+                <span class="text-light">
+                    <i class="fa fa-bars fa-1x"></i>
+                </span>
+            </button>
+            
+            <!-- Nav list items -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="nav navbar-nav ms-auto">
+
+                    {% if not g.user %} 
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link text-light"
+                            id="active1" 
+                            href="/signup">
+                            Sign Up
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a 
+                            class="nav-link text-light"
+                            id="active1"  
+                            href="/login">
+                            Log In
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link text-light"
+                            id="active1"  
+                            href="/users/collection/{{ g.user.id }}">
+                            My Collection
+                        </a>
+                    </li> 
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link text-light"
+                            id="active1"   
+                            href="/users/profile/{{ g.user.id }}">
+                            {{ g.user.username }}
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a 
+                            class="nav-link text-light"
+                            id="active1"   
+                            href="/logout">
+                            Log Out
+                        </a>
+                    </li> -->
+                    {% endif %}
+                    
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div id="content">{% block content %}{% endblock %}</div>
+
+    <!-- Bootstrap JavaScript Links -->
+<script 
+    src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    crossorigin="anonymous"
+>
+</script>
+<script 
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" 
+    crossorigin="anonymous"
+></script>
+<script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" 
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" 
+    crossorigin="anonymous"
+></script>
+
+    
+</body>
+
+</html>

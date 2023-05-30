@@ -1,0 +1,74 @@
+.navLogo {
+    width: 32px;
+}
+
+body {
+    /* background-image: url('/static/images/moon-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; */
+    /* overflow: none; */
+    background-color: #0d0d0d;
+}
+
+.nav-link:hover {
+    color: steelblue !important;
+}
+
+.header-logo {
+    display: block;
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-bar {
+    width: 80%;
+    margin: 2rem auto 0 auto;
+}
+
+/* Card Styles */
+.releases-container {
+    width: 80%;
+    margin: 2rem auto 0 auto;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.card-image-top {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.add-btn {
+    display: none;
+    width: 90%;
+    text-align: center;
+    align-items: center;
+}
+
+.card:hover .add-btn {
+    display: block;
+}
+
+.add-btn-hidden {
+    background-color: rgba(128, 128, 128, 0.8);
+    color: white;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.add-btn-hidden:hover {
+    color: steelblue;
+}
+
