@@ -21,7 +21,10 @@ app = Flask(__name__)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///recordshopdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+# render external db code
+# postgres://lalunacapstonedb_user:QVXErKJXZ0NDgb2foQZnplmW2kBTO5zJ@dpg-chr4h01mbg5e1f7mt7pg-a.oregon-postgres.render.com/lalunacapstonedb
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "password123"
