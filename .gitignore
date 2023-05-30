@@ -1,1 +1,4 @@
 lock.py
+migrations/
+_pycache_
+venv/
