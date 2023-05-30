@@ -46,17 +46,17 @@
                                 <input 
                                     type="hidden" 
                                     name="title" 
-                                    value="{{ release['title'] }}"
+                                    value="{{ result['title'] }}"
                                 >
                                 <input 
                                     type="hidden" 
                                     name="year" 
-                                    value="{{ release['year'] }}"
+                                    value="{{ result['year'] }}"
                                 >
                                 <input 
                                     type="hidden" 
                                     name="thumbnail" 
-                                    value="{{ release['thumbnail'] }}"
+                                    value="{{ result['thumbnail'] }}"
                                 >
                                 <button 
                                     class="btn btn-dark add-btn-hidden" type="submit"
@@ -94,7 +94,7 @@
                         <div class="add-btn position-absolute bottom-0 start-0 end-0 p-2">
                             <form 
                                 class="add-to-collection"
-                                action="/"
+                                action="/collection/{{ release['id'] }}/add"
                                 method="POST"
                             >
                                 <input

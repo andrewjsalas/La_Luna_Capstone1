@@ -39,12 +39,15 @@ d = discogs_client.Client('my_user_agent/1.0', user_token=API_TOKEN)
 def add_user_to_g():
     """If user logged in, add curr user to Flask global"""
 
+    g.user = None
+
     if CURR_USER_KEY in session:
         g.user = User.query.get(session[CURR_USER_KEY])
-    else:
-        g.user = None
+    # else:
+    #     g.user = None
 
-    print(session[CURR_USER_KEY])
+    if CURR_USER_KEY in session:
+        print(session[CURR_USER_KEY])
 
 
 def do_login(user):
@@ -146,34 +149,6 @@ def homepage():
                 'thumbnail': result.thumb if result.thumb else 'https://via.placeholder.com/150x150.png?text=No+Image'
             })
 
-        """Add release to collection handler"""
-
-        # if request.method == 'POST':
-        #     if not g.user:
-        #         flash(
-        #             "Access unauthorized. Please sign in or create an account.",  "danger")
-        #         return redirect('/')
-
-        release_id = request.form['release_id']
-        title = request.form['title']
-        year = request.form['year']
-        thumbnail = request.form['thumbnail']
-
-        release = d.release(release_id)
-
-        collection_item = Collection(
-            user_id=g.user.id,
-            release_id=release.id,
-            title=release.title,
-            year=release.year,
-            thumbnail=release.thumb if release.thumb else 'https://via.placeholder.com/150x150.png?text=No+Image'
-        )
-
-        db.session.add(collection_item)
-        db.session.commit()
-
-        return jsonify({'message': 'Added to Collection'}), 200
-
     """Featured releases"""
     """The featured releases are taken from the label_id of Capitol Records and displayed"""
 
@@ -256,36 +231,30 @@ def user_collection(user_id):
 ##### WISHLIST AND RELEASE ROUTES #####
 
 
-# @app.route('/add_to_collection/<int:release_id>', methods=['POST'])
-# def add_to_collection(release_id):
-#     if not g.user:
-#         flash("Access unauthorized. Please sign in or make an account.", "danger")
-#         return redirect('/')
+@app.route('/collection/<int:release_id>/add', methods=['POST'])
+def add_to_collection(release_id):
 
-#     release_id = request.form['release_id']
-#     title = request.form['title']
-#     year = request.form['year']
-#     thumbnail = request.form['thumbnail']
+    if not g.user:
+        flash("Access unauthorized. Please sign in or make an account.", "danger")
+        return redirect('/')
 
-#     # collection_item = Collection(
-#     #     user_id=g.user.id,
-#     #     title=title,
-#     #     year=year,
-#     #     thumbnail=thumbnail
-#     # )
+    release_id = request.form['release_id']
+    title = request.form['title']
+    year = request.form['year']
+    thumbnail = request.form['thumbnail']
 
-#     release = d.release(release_id)
+    release = d.release(release_id)
 
-#     collection_item = Collection(
-#         user_id=g.user.id,
-#         release_id=release.id,
-#         title=release.title,
-#         artist=release.artist,
-#         year=release.year,
-#         thumbnail=release.thumb if release.thumb else 'https://via.placeholder.com/150x150.png?text=No+Image'
-#     )
+    collection_item = Collection(
+        user_id=g.user.id,
+        release_id=release_id,
+        title=release.title,
+        year=release.year,
+        thumbnail=release.thumb if release.thumb else 'https://via.placeholder.com/150x150.png?text=No+Image'
+    )
 
-#     db.session.add(collection_item)
-#     db.session.commit()
+    db.session.add(collection_item)
+    db.session.commit()
 
-#     return jsonify({'message': 'Added to Collection'}), 200
+    flash('Release added to Collection.', "success")
+    return redirect('/')
